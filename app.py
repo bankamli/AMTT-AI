@@ -30,9 +30,10 @@ if api_key:
         st.session_state.messages.append({"role": "user", "content": user_prompt})
 
         try:
-            # สร้าง Client และแปลงประวัติข้อความให้พร้อมส่งเข้า API
+            # สร้าง Client จาก API Key ที่ป้อนเข้ามา
             client = genai.Client(api_key=api_key)
             
+            # แปลงประวัติข้อความให้พร้อมส่งเข้า API
             contents = []
             for msg in st.session_state.messages:
                 role = "user" if msg["role"] == "user" else "model"
@@ -40,7 +41,7 @@ if api_key:
 
             # ส่งข้อความหา AI
             response = client.models.generate_content(
-                model="gemini-3.6-flash",
+                model="gemini-2.5-flash",
                 contents=contents
             )
 
@@ -51,5 +52,6 @@ if api_key:
 
         except Exception as e:
             st.error(f"เกิดข้อผิดพลาดในการเชื่อมต่อ: {e}")
+            st.info("💡 กรุณาตรวจสอบว่า API Key ถูกต้อง และสร้างจาก https://aistudio.google.com")
 else:
     st.info("👈 กรุณากรอก API Key ที่แถบด้านซ้ายก่อนเริ่มใช้งานครับ")
