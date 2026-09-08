@@ -37,4 +37,4 @@ if api_key:
             st.markdown(response.text)
         st.session_state.messages.append({"role": "assistant", "content": response.text})
 else:
-    st.info("....")
+    st.info("👈 กรุณากรอก API Key ที่แถบด้านซ้ายก่อนเริ่มใช้งานครับ")
