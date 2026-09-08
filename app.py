@@ -30,10 +30,10 @@ if api_key:
         st.session_state.messages.append({"role": "user", "content": user_prompt})
 
         try:
-            # สร้าง Client ใหม่สดๆ ทุกครั้งที่กดส่งข้อความ เพื่อป้องกัน Connection Closed
+            # สร้าง Client ใหม่ทุกครั้งป้องกัน Connection หลุด
             client = genai.Client(api_key=api_key)
             
-            # แปลงประวัติการสนทนาให้ตรงรูปแบบของ API
+            # แปลงประวัติการสนทนาส่งเข้า API
             contents = []
             for msg in st.session_state.messages:
                 role = "user" if msg["role"] == "user" else "model"
@@ -42,9 +42,9 @@ if api_key:
                     "parts": [{"text": msg["content"]}]
                 })
 
-            # เรียกใช้งาน Gemini 2.5 Flash
+            # เรียกใช้งาน Gemini 3.6 Flash (โมเดลล่าสุด)
             response = client.models.generate_content(
-                model="gemini-2.5-flash",
+                model="gemini-3.6-flash",
                 contents=contents
             )
 
