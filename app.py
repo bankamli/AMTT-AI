@@ -37,4 +37,4 @@ if api_key:
             st.markdown(response.text)
         st.session_state.messages.append({"role": "assistant", "content": response.text})
 else:
-    st.info("AQ.Ab8RN6Ii-qtXoB2b_tK_YtvJ7t0wWgGX8AkWjuWdSxyCSSUajQ")
+    st.info("....")
